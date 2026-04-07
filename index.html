@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agencia Digital | Soluciones Web de Alto Impacto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- AOS para animaciones de scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+        :root {
+            --brand-cyan: #0093a8;
+            --brand-gold: #dfb96c;
+            --dark-navy: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
+            color: var(--dark-navy);
+            scroll-behavior: smooth;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--brand-cyan), var(--brand-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-primary {
+            background: var(--brand-cyan);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px -5px rgba(0, 147, 168, 0.4);
+        }
+
+        .portfolio-card {
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-12px);
+        }
+
+        /* Estilos de validación */
+        .error-message {
+            display: none;
+            color: #ef4444;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            font-weight: 600;
+        }
+
+        input.invalid, textarea.invalid {
+            border: 2px solid #ef4444 !important;
+            background-color: #fef2f2;
+        }
+
+        /* Ocultar scrollbar pero mantener funcionalidad */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--brand-cyan);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Navegación Premium -->
+    <nav class="fixed w-full z-[100] bg-white/70 backdrop-blur-lg border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-cyan to-brand-gold rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                        <div class="relative w-11 h-11 bg-white rounded-full flex items-center justify-center border border-slate-100 shadow-sm">
+                            <i class="fa-solid fa-layer-group text-brand-cyan text-xl"></i>
+                        </div>
+                    </div>
+                    <span class="text-xl font-extrabold tracking-tighter text-slate-900 uppercase">AGENCIA<span class="text-brand-cyan">DIGITAL</span></span>
+                </div>
+                
+                <div class="hidden lg:flex space-x-10 items-center font-semibold text-slate-600 text-sm tracking-wide">
+                    <a href="#inicio" class="hover:text-brand-cyan transition-colors">INICIO</a>
+                    <a href="#servicios" class="hover:text-brand-cyan transition-colors">SERVICIOS</a>
+                    <a href="#proyectos" class="hover:text-brand-cyan transition-colors">PORTAFOLIO</a>
+                    <a href="#galeria" class="hover:text-brand-cyan transition-colors">EQUIPO</a>
+                    <a href="#contacto" class="btn-primary px-7 py-3 text-white rounded-full shadow-lg">TRABAJEMOS JUNTOS</a>
+                </div>
+
+                <button id="mobile-btn" class="lg:hidden text-slate-800">
+                    <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menú Móvil -->
+    <div id="mobile-menu" class="fixed inset-0 z-[90] bg-white transform translate-x-full transition-transform duration-300 lg:hidden flex flex-col justify-center items-center space-y-8 text-2xl font-bold">
+        <a href="#inicio" onclick="toggleMenu()">Inicio</a>
+        <a href="#servicios" onclick="toggleMenu()">Servicios</a>
+        <a href="#proyectos" onclick="toggleMenu()">Portafolio</a>
+        <a href="#contacto" onclick="toggleMenu()" class="text-brand-cyan">Contacto</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-slate-50">
+        <div class="absolute top-20 right-[-10%] w-[500px] h-[500px] bg-brand-cyan/5 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-20 left-[-10%] w-[400px] h-[400px] bg-brand-gold/5 rounded-full blur-[100px]"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center relative">
+            <div data-aos="fade-right" data-aos-duration="1000">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-cyan/10 text-brand-cyan text-xs font-bold tracking-widest uppercase mb-6">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-cyan"></span>
+                    </span>
+                    Expertos en Crecimiento Digital
+                </div>
+                <h1 class="text-6xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-8">
+                    Elevamos tu <span class="text-gradient">Presencia</span> en el Mundo Digital.
+                </h1>
+                <p class="text-xl text-slate-500 leading-relaxed max-w-lg mb-10">
+                    Diseño web vanguardista y estrategias de marketing impulsadas por datos para empresas que buscan el éxito real.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="#proyectos" class="btn-primary px-10 py-5 text-white rounded-2xl font-bold text-center shadow-xl">Explorar Proyectos</a>
+                    <div class="flex items-center gap-4 px-6 py-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="flex -space-x-3">
+                            <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white"><img src="img/resena.png" alt=""></div>
+                            <div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-white"><img src="img/resena3.png" alt=""></div>
+                            <div class="w-8 h-8 rounded-full bg-slate-500 border-2 border-white"><img src="img/resena2.png" alt=""></div>
+                        </div>
+                        <span class="text-sm font-semibold text-slate-600">+100 Clientes Felices</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl border-[8px] border-white">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200" alt="Dashboard" class="w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section id="servicios" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-24" data-aos="fade-up">
+                <h2 class="text-brand-cyan font-bold tracking-[0.3em] uppercase text-sm mb-4">Nuestra Experiencia</h2>
+                <h3 class="text-4xl md:text-5xl font-extrabold text-slate-900">Servicios que Impulsan Resultados</h3>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="group p-10 rounded-[2rem] bg-slate-50 hover:bg-slate-900 transition-all duration-500" data-aos="fade-up">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-2xl mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-code text-brand-cyan"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-4 group-hover:text-white">Desarrollo Web</h4>
+                    <p class="text-slate-500 group-hover:text-slate-400 leading-relaxed">
+                        Creamos experiencias digitales rápidas, seguras y escalables utilizando las últimas tecnologías.
+                    </p>
+                </div>
+                <div class="group p-10 rounded-[2rem] bg-slate-50 hover:bg-slate-900 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-2xl mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line text-brand-gold"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-4 group-hover:text-white">Marketing Digital</h4>
+                    <p class="text-slate-500 group-hover:text-slate-400 leading-relaxed">
+                        Posicionamos tu marca frente a la audiencia correcta con estrategias de SEO y Paid Media.
+                    </p>
+                </div>
+                <div class="group p-10 rounded-[2rem] bg-slate-50 hover:bg-slate-900 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-2xl mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-mobile-screen-button text-brand-cyan"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-4 group-hover:text-white">Apps & UI/UX</h4>
+                    <p class="text-slate-500 group-hover:text-slate-400 leading-relaxed">
+                        Diseños centrados en el usuario que no solo se ven bien, sino que venden y retienen clientes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo de Trabajos (Portfolio) -->
+    <section id="proyectos" class="py-32 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16" data-aos="fade-right">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">Trabajos Seleccionados</h2>
+                    <p class="text-slate-500 text-lg">Una muestra de las plataformas digitales que hemos diseñado y desarrollado para nuestros clientes.</p>
+                </div>
+                <a href="#" class="mt-8 md:mt-0 font-bold text-brand-cyan group flex items-center gap-2">
+                    VER TODO EL CATALOGO <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Proyectos ejemplo -->
+                <div class="portfolio-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 group" data-aos="zoom-in-up">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="img/noa-noa.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-brand-cyan/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                             <a href="https://ecuador-comidas.github.io/noa_noa_Restaurante-Cafeteria/" target="_blank" class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-brand-cyan shadow-lg"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-4">
+                        </div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-3">Noa Noa Restaurante</h4>
+                        <a href="https://ecuador-comidas.github.io/noa_noa_Restaurante-Cafeteria/" target="_blank" class="text-brand-cyan font-bold text-sm">Explorar Sitio &nearrow;</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 group" data-aos="zoom-in-up" data-aos-delay="100">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="img/El-Bamboo.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-brand-cyan/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                             <a href="https://ecuador-comidas.github.io/El_Bamboo/" target="_blank" class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-brand-cyan shadow-lg"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-4">
+                        </div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-3">Resto-Bar El Bamboo</h4>
+                        <a href="https://ecuador-comidas.github.io/El_Bamboo/" target="_blank" class="text-brand-cyan font-bold text-sm">Explorar Sitio &nearrow;</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-200/50 group" data-aos="zoom-in-up" data-aos-delay="200">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="img/La-Aldea.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-brand-cyan/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                             <a href="https://ecuador-comidas.github.io/La_Aldea_Food-Drinks/" target="_blank" class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-brand-cyan shadow-lg"><i class="fa-solid fa-link"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-[10px] font-black tracking-widest text-brand-gold uppercase bg-brand-gold/5 px-3 py-1 rounded-full">MARKETING</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-slate-900 mb-3">GreenTech Solutions</h4>
+                        <a href="https://ecuador-comidas.github.io/La_Aldea_Food-Drinks/" target="_blank" class="text-brand-cyan font-bold text-sm">Explorar Sitio &nearrow;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de Estilo de Vida (ACTUALIZADA) -->
+    <section id="galeria" class="py-32 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-extrabold mb-4 text-slate-900">Detrás de las Pantallas</h2>
+                <p class="text-slate-500">Nuestra cultura, nuestro equipo y nuestra pasión.</p>
+            </div>
+            
+            <!-- Grid de 3 columnas para imágenes más pequeñas y uniformes -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Imagen 1 -->
+                <div class="aspect-square overflow-hidden rounded-[1.5rem] shadow-lg group" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <!-- Imagen 2 -->
+                <div class="aspect-square overflow-hidden rounded-[1.5rem] shadow-lg group" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <!-- Imagen 3 -->
+                <div class="aspect-square overflow-hidden rounded-[1.5rem] shadow-lg group" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto con Formulario Validado y Formspree -->
+    <section id="contacto" class="py-32 bg-slate-900 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <div class="absolute top-0 left-0 w-64 h-64 bg-brand-cyan blur-[120px]"></div>
+            <div class="absolute bottom-0 right-0 w-64 h-64 bg-brand-gold blur-[120px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-20 items-start">
+                <div data-aos="fade-right">
+                    <h2 class="text-5xl font-extrabold text-white mb-8 leading-tight">¿Tienes una idea brillante? <br><span class="text-brand-cyan">Hagámosla Real.</span></h2>
+                    <p class="text-slate-400 text-lg mb-12">Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-brand-cyan text-xl">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-bold">Email Directo</h5>
+                                <p class="text-slate-400">wilson.porras0173@utc.edu.ec</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-brand-gold text-xl">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-bold">WhatsApp Business</h5>
+                                <p class="text-slate-400">+593 97 930 7706</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[2.5rem] p-10 lg:p-12 shadow-2xl" data-aos="fade-left">
+                    <!-- Integración con Formspree: Reemplaza TU_ID por tu código de Formspree -->
+                    <form id="contactForm" action="https://formspree.io/f/mlgozzyr" method="POST" class="space-y-5" novalidate>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-slate-500 text-xs font-black uppercase tracking-widest mb-3">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" class="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-brand-cyan outline-none transition" placeholder="Tu nombre">
+                                <span id="error-nombre" class="error-message">Ingresa un nombre válido.</span>
+                            </div>
+                            <div>
+                                <label class="block text-slate-500 text-xs font-black uppercase tracking-widest mb-3">Celular</label>
+                                <input type="tel" id="celular" name="celular" class="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-brand-cyan outline-none transition" placeholder="Ej: 3001234567">
+                                <span id="error-celular" class="error-message">Debe tener 10 dígitos numéricos.</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-slate-500 text-xs font-black uppercase tracking-widest mb-3">Email</label>
+                            <input type="email" id="email" name="_replyto" class="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-brand-cyan outline-none transition" placeholder="tu@email.com">
+                            <span id="error-email" class="error-message">Ingresa un correo electrónico válido.</span>
+                        </div>
+                        <div>
+                            <label class="block text-slate-500 text-xs font-black uppercase tracking-widest mb-3">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-6 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-brand-cyan outline-none transition" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+                            <span id="error-mensaje" class="error-message">Por favor, escribe un mensaje.</span>
+                        </div>
+                        
+                        <!-- Campo oculto para evitar SPAM -->
+                        <input type="text" name="_gotcha" style="display:none">
+
+                        <button type="submit" class="w-full py-5 btn-primary text-white font-extrabold rounded-2xl shadow-xl tracking-widest uppercase">Enviar Solicitud</button>
+                    </form>
+                    <div id="success-msg" class="hidden mt-4 p-4 bg-green-50 text-green-700 rounded-xl text-center font-bold">
+                        ¡Validación exitosa! Redirigiendo al envío...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-bold">AD</div>
+                <span class="font-black text-slate-900 uppercase">Agencia Digital</span>
+            </div>
+            <div class="flex gap-4">
+                <a href="https://www.linkedin.com/in/wilson-fernando-porras-atiaja-819233321/" class="w-11 h-11 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 hover:text-brand-cyan hover:bg-white hover:shadow-md transition duration-300">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <!-- Nuevo Botón TikTok -->
+                <a href="https://www.tiktok.com/@agencia_digital.com" class="w-11 h-11 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 hover:text-black hover:bg-white hover:shadow-md transition duration-300">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+        <div class="text-center mt-8 text-slate-400 text-xs">
+            &copy; 2025 Agencia Digital. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 800 });
+
+        // Menu móvil
+        const btn = document.getElementById('mobile-btn');
+        const menu = document.getElementById('mobile-menu');
+        function toggleMenu() { menu.classList.toggle('translate-x-full'); }
+        btn.addEventListener('click', toggleMenu);
+
+        // --- LÓGICA DE VALIDACIÓN ANTES DE ENVIAR A FORMSPREE ---
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            let isValid = true;
+            
+            const nombre = document.getElementById('nombre');
+            const celular = document.getElementById('celular');
+            const email = document.getElementById('email');
+            const mensaje = document.getElementById('mensaje');
+            
+            // Validar Nombre
+            if (nombre.value.trim().length < 3) {
+                showError(nombre, 'error-nombre');
+                isValid = false;
+            } else {
+                hideError(nombre, 'error-nombre');
+            }
+
+            // Validar Celular (Solo números y 10 dígitos)
+            const celRegex = /^\d{10}$/;
+            if (!celRegex.test(celular.value.trim())) {
+                showError(celular, 'error-celular');
+                isValid = false;
+            } else {
+                hideError(celular, 'error-celular');
+            }
+
+            // Validar Email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value.trim())) {
+                showError(email, 'error-email');
+                isValid = false;
+            } else {
+                hideError(email, 'error-email');
+            }
+
+            // Validar Mensaje
+            if (mensaje.value.trim() === "") {
+                showError(mensaje, 'error-mensaje');
+                isValid = false;
+            } else {
+                hideError(mensaje, 'error-mensaje');
+            }
+
+            // Si no es válido, detenemos el envío a Formspree
+            if (!isValid) {
+                e.preventDefault();
+            } else {
+                // Si es válido, mostramos feedback antes de redirigir
+                document.getElementById('success-msg').classList.remove('hidden');
+            }
+        });
+
+        function showError(input, errorId) {
+            input.classList.add('invalid');
+            document.getElementById(errorId).style.display = 'block';
+        }
+
+        function hideError(input, errorId) {
+            input.classList.remove('invalid');
+            document.getElementById(errorId).style.display = 'none';
+        }
+
+        // Restringir entrada de celular a solo números
+        document.getElementById('celular').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+        });
+    </script>
+</body>
+</html>
